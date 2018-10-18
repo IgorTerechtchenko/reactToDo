@@ -4,20 +4,18 @@ import { IListItem } from "../../types/IListItem";
 import { AppTemplate } from "./AppTemplate";
 
 interface IState {
-  currentValue: string;
   items: IListItem[];
 }
 
 export class AppBehaviour extends React.Component<{}, IState> {
   constructor(props: {}) {
     super(props);
-    this.state = { currentValue: "", items: [] };
+    this.state = { items: [] };
     this.liftInputValue = this.liftInputValue.bind(this);
     this.removeItem = this.removeItem.bind(this);
   }
   public render(): JSX.Element {
     return React.createElement(AppTemplate, {
-      currentValue: this.state.currentValue,
       items: this.state.items,
       liftInputValue: this.liftInputValue,
       removeItem: this.removeItem

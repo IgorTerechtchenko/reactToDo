@@ -16,20 +16,20 @@ export class FormBehaviour extends React.Component<IProps, IState> {
     this.handleClick = this.handleClick.bind(this);
     this.state = { value: "" };
   }
-  public render() {
+  public render(): JSX.Element {
     return React.createElement(FormTemplate, {
       changeHandler: this.handleChange,
       clickHandler: this.handleClick,
       value: this.state.value
     });
   }
-  private handleClick(event: React.SyntheticEvent<HTMLButtonElement>) {
+  private handleClick(event: React.SyntheticEvent<HTMLButtonElement>): void {
     if (this.state.value !== "") {
       this.props.liftInputValue(this.state.value);
     }
     this.setState({ value: "" });
   }
-  private handleChange(event: React.SyntheticEvent<HTMLInputElement>) {
+  private handleChange(event: React.SyntheticEvent<HTMLInputElement>): void {
     const newValue = event.currentTarget.value;
     this.setState({ value: newValue });
   }

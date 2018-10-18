@@ -1,22 +1,20 @@
 import * as React from "react";
+import { IListItem } from "../../types/IListItem"
 
 interface IProps {
-  textValue: string;
-  handleDeleteClick: (id: string) => void;
-  id: string;
+  removeItem: (id: string) => void;
+  item: IListItem;
 }
 
-export function ListItemTemplate(props: IProps) {
+export function ListItemTemplate({ item: { id, textValue }, removeItem}: IProps) {
   function deleteById() {
-    props.handleDeleteClick(props.id);
+    removeItem(id);
   }
-  const { textValue } = props;
   return (
     <li>
-      {textValue}{" "}
+      {textValue}
       <button className="delete" onClick={deleteById}>
-        {" "}
-        Delete{" "}
+        Delete
       </button>
     </li>
   );

@@ -2,12 +2,11 @@ import * as React from "react";
 
 interface IProps {
   clickHandler: () => void;
-  changeHandler: () => string;
+  changeHandler: () => void;
   value: string;
 }
 
-export function FormTemplate(props: IProps): JSX.Element {
-  const { value, clickHandler, changeHandler } = props;
+export function FormTemplate({ value, clickHandler, changeHandler }: IProps): JSX.Element {
   return (
     <div>
       <input value={value} onChange={changeHandler} />

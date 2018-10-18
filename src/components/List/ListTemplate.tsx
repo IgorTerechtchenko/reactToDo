@@ -3,24 +3,21 @@ import { IListItem } from "../../types/IListItem";
 import { ListItemTemplate } from "../ListItem/ListItemTemplate";
 
 interface IProps {
+  removeItem: (id: string) => void;
   items: IListItem[];
-  handleDeleteClick: (id: string) => void;
 }
 
 export function ListTemplate(props: IProps): JSX.Element {
   return (
     <div>
       <ul>
-        {props.items.map((item: IListItem) => {
-          return (
+        {props.items.map((item: IListItem) => (
             <ListItemTemplate
               key={item.id}
-              textValue={item.textValue}
-              id={item.id}
-              handleDeleteClick={props.handleDeleteClick}
-            />
-          );
-        })}
+              item={item}
+              removeItem={props.removeItem}
+            />)
+        )}
       </ul>
     </div>
   );
