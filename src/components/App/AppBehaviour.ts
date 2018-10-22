@@ -2,6 +2,8 @@ import * as React from "react";
 import { v1 as uuidv1 } from "uuid";
 import { IListItem } from "../../types/IListItem";
 import { AppTemplate } from "./AppTemplate";
+import { addItem, removeItem } from "../../store/app/actions";
+import { store } from "../../store/app/index";
 
 interface IState {
   items: IListItem[];
@@ -10,26 +12,25 @@ interface IState {
 export class AppBehaviour extends React.Component<{}, IState> {
   constructor(props: {}) {
     super(props);
-    this.state = { items: [] };
     this.liftInputValue = this.liftInputValue.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    store.subscribe(this.render.bind(this));
   }
   public render(): JSX.Element {
     return React.createElement(AppTemplate, {
-      items: this.state.items,
+      items: store.getState().itemList,
       liftInputValue: this.liftInputValue,
       removeItem: this.removeItem
     });
   }
   private liftInputValue(value: string) {
     const newValue = { id: uuidv1(), textValue: value };
-    const tmpItems = [...this.state.items, newValue];
-    this.setState({ items: tmpItems });
+    store.dispatch(addItem(newValue));
   }
   private removeItem(id: string) {
     const tmpItems = this.state.items.filter((item: IListItem) => {
       return item.id !== id;
     });
-    this.setState({ items: tmpItems });
+    store.dispatch(removeItem(tmpItems));
   }
 }
