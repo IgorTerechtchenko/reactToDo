@@ -1,4 +1,6 @@
 import * as React from "react";
+import { v1 as uuid } from "uuid";
+import { ITask } from "../../store/task/types";
 import { FormTemplate } from "./FormTemplate";
 
 interface IState {
@@ -6,7 +8,8 @@ interface IState {
 }
 
 interface IProps {
-  liftInputValue: (value: string) => void;
+  addItem: (newValue: IState) => void,
+  removeItem: (id: string) => void,
 }
 
 export class FormBehaviour extends React.Component<IProps, IState> {
@@ -25,9 +28,9 @@ export class FormBehaviour extends React.Component<IProps, IState> {
   }
   private handleClick(event: React.SyntheticEvent<HTMLButtonElement>): void {
     if (this.state.value !== "") {
-      this.props.liftInputValue(this.state.value);
+      const newValue: ITask = { id: uuid(), textValue: this.state.value };
+      this.props.addItem(newValue);
     }
-    this.setState({ value: "" });
   }
   private handleChange(event: React.SyntheticEvent<HTMLInputElement>): void {
     const newValue = event.currentTarget.value;

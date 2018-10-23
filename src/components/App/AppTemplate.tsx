@@ -1,20 +1,19 @@
 import * as React from "react";
-import { IListItem } from "../../types/IListItem";
+import { ITask } from  "../../store/task/types"
 import { FormBehaviour } from "../Form/FormBehaviour";
 import { ListTemplate } from "../List/ListTemplate";
 
 interface IProps {
-  liftInputValue: () => void;
-  removeItem: () => void;
-  items: IListItem[];
+  addTask: () => void;
+  removeTask: () => void;
+  taskList: ITask[];
 }
 
 export function AppTemplate(props: IProps): JSX.Element {
-  const { liftInputValue, removeItem } = props;
   return (
     <div>
-      <FormBehaviour liftInputValue={liftInputValue} />
-      <ListTemplate items={props.items} removeItem={removeItem} />
+      <FormBehaviour/>
+      <ListTemplate taskList = { props.taskList } removeTask = {props.removeTask }/>
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import * as React from "react";
-import { IListItem } from "../../types/IListItem"
+import { ITask } from "../../store/task/types"
 
 interface IProps {
-  removeItem: (id: string) => void;
-  item: IListItem;
+  removeTask: (id: string) => void;
+  item: ITask;
 }
 
-export function ListItemTemplate({ item: { id, textValue }, removeItem}: IProps) {
+export function ListItemTemplate({ item: { id, textValue }, removeTask}: IProps) {
   function deleteById() {
-    removeItem(id);
+    removeTask(id);
   }
   return (
     <li>
